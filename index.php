@@ -11,6 +11,7 @@
     <title>My Blog</title>
   </head>
   <body>
+    <?php include('parts/_navbar.php')?>
     <h1>Hello, world!</h1>
 
     <!-- Optional JavaScript -->
