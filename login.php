@@ -1,3 +1,32 @@
+<?php
+
+$passnotmatch=false;
+
+if ($_SERVER["REQUEST_METHOD"]=="POST"){
+  include 'parts/_dbconnect.php';
+  $mail=$_POST["mail"];
+  $password=$_POST["pass"];
+
+  $sql="SELECT * FROM `admins` WHERE mail='$mail'";
+  $result=mysqli_query($conn,$sql);
+  $num=mysqli_num_rows($result);
+
+  if($num==1){
+    while($row=mysqli_fetch_assoc($result)){
+      if($password==$row['password']){
+        session_start();
+        $_SESSION['loggedin']=true;
+        $_SESSION['mail']=$mail;
+        header("location: post.php");
+      } else{
+        $passnotmatch=true;
+      }
+    }
+  }
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,7 +43,7 @@
   <?php include('parts/_navbar.php')?>
   <div class="container my-3">
       <h2>Login to post</h2>
-    <form>
+    <form action="login.php" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control" id="mail" name="mail" aria-describedby="emailHelp">
