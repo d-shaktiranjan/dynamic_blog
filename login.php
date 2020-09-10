@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+if(isset($_SESSION['mail'])){
+  header("location: post.php");
+}
+
 $error=false;
 
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
