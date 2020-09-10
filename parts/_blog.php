@@ -1,12 +1,8 @@
 <?php
 
-include 'parts/_dbconnect.php';
 
-$sql="SELECT * FROM `blog`";
-$result=mysqli_query($conn,$sql);
 
 ?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,25 +13,10 @@ $result=mysqli_query($conn,$sql);
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>My Blog</title>
+    <title>Hello, world!</title>
   </head>
   <body>
-    <?php include('parts/_navbar.php');
-    include('parts/_header.php');
-while($row=mysqli_fetch_assoc($result)){
-  echo '<div class="card text-center">
-  <div class="card-body">
-    <h5 class="card-title">'.$row['title'].'</h5>
-    <p class="card-text">'.$row['content'].'.</p>
-    <a href="#" class="btn btn-primary">Read More</a>
-  </div>
-  <div class="card-footer text-muted">
-    2 days ago
-  </div>
-</div>';
-}
-?>
-</div>
+  <?php include('_navbar.php')?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
