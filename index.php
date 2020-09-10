@@ -1,3 +1,12 @@
+<?php
+
+include 'parts/_dbconnect.php';
+
+$sql="SELECT * FROM `blog`";
+$result=mysqli_query($conn,$sql);
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -39,14 +48,20 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-
-<div class="card my-3" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+<?php
+while($row=mysqli_fetch_assoc($result)){
+  echo '<div class="card text-center">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">'.$row['title'].'</h5>
+    <p class="card-text">'.$row['content'].'.</p>
+    <a href="#" class="btn btn-primary">Read More</a>
   </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div>';
+}
+?>
 </div>
 
     <!-- Optional JavaScript -->
