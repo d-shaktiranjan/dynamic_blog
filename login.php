@@ -1,6 +1,6 @@
 <?php
 
-$passnotmatch=false;
+$error=false;
 
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
   include 'parts/_dbconnect.php';
@@ -19,9 +19,11 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $_SESSION['mail']=$mail;
         header("location: post.php");
       } else{
-        $passnotmatch=true;
+        $error=true;
       }
     }
+  } else{
+    $error=true;
   }
 }
 
@@ -40,7 +42,16 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     <title>Author's Page</title>
   </head>
   <body>
-  <?php include('parts/_navbar.php')?>
+  <?php include('parts/_navbar.php');
+  if($error){
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Mail not found or incorrect password.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>';
+  }
+  ?>
   <div class="container my-3">
       <h2>Login to post</h2>
     <form action="login.php" method="post">
