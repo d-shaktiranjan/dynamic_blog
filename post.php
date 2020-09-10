@@ -5,6 +5,8 @@ if(!$_SESSION['loggedin']){
     header("location: login.php");
 }
 
+$done=false;
+
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
   include 'parts/_dbconnect.php';
   $title=$_POST["title"];
@@ -13,6 +15,9 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
   $sql="INSERT INTO `blog` (`title`, `content`, `time`, `author`) 
   VALUES ('$title', '$content', current_timestamp(), 'Shakti')";
   $result=mysqli_query($conn,$sql);
+  if($result){
+    $done=true;
+  }
 }
 
 ?>
@@ -29,7 +34,16 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     <title>Authos's Page</title>
   </head>
   <body>
-    <?php include('parts/_navbar.php')?>
+    <?php include('parts/_navbar.php');
+    if($done){
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Added!</strong> Your new blog added.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>';
+    }
+    ?>
 
     <div class="container my-3">
         <h2>Fill to post</h2>
