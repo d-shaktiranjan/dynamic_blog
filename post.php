@@ -5,6 +5,16 @@ if(!$_SESSION['loggedin']){
     header("location: login.php");
 }
 
+if ($_SERVER["REQUEST_METHOD"]=="POST"){
+  include 'parts/_dbconnect.php';
+  $title=$_POST["title"];
+  $content=$_POST["content"];
+
+  $sql="INSERT INTO `blog` (`title`, `content`, `time`, `author`) 
+  VALUES ('$title', '$content', current_timestamp(), 'Shakti')";
+  $result=mysqli_query($conn,$sql);
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,7 +34,7 @@ if(!$_SESSION['loggedin']){
     <div class="container my-3">
         <h2>Fill to post</h2>
         <hr>
-        <form>
+        <form action="post.php" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Title</label>
         <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
