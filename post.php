@@ -59,6 +59,10 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     </div>
     <button type="submit" class="btn btn-primary">Post Now</button>
     </form>
+    <div class="container my-4">
+    <button type="button" class="btn btn-outline-danger"
+     onclick="document.location='parts/_logout.php'">Logout</button>
+    </div>
     </div>
 
     <!-- Optional JavaScript -->
